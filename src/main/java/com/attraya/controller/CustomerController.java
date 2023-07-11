@@ -21,14 +21,14 @@ public class CustomerController {
     public String listCustomers(Map<String, Object> model){
         List<Customer> customers = service.getCustomers();
         model.put("customers", customers);
-        return "/customers/list-customers";
+        return "list-customers";
     }
 
     @GetMapping("/showForm")
     public String showFormForAdd(Map<String, Object> model){
         Customer customer = new Customer();
         model.put("customer", customer);
-        return "/customers/customer-form";
+        return "customer-form";
     }
 
     @PostMapping("/saveCustomer")
@@ -37,14 +37,14 @@ public class CustomerController {
         return "redirect:/customer/list";
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam Integer customerId, Map<String, Object> model) {
         Customer customer = service.getCustomer(customerId);
         model.put("customer", customer);
-        return "/customers/customer-form";
+        return "customer-form";
     }
 
-    @PostMapping("/showFormForDelete")
+    @GetMapping("/showFormForDelete")
     public String showFormForDelete(@RequestParam Integer customerId){
         service.deleteCustomer(customerId);
         return "redirect:/customer/list";
